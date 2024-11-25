@@ -1,4 +1,6 @@
 size = 20;
+isRunning = false;
+mouseIsDown = false;
 
 $("#grid-size").on("input", function(){
     size = $(this).val();
@@ -16,5 +18,20 @@ function createGrid(){
     }
     $("#grid").html(gridHtml);
 }
+
+$("#grid").on("mouseover", ".cell", function(){
+    if(mouseIsDown){
+        $(this).toggleClass("alive");
+    }
+});
+
+$("#grid").on("mousedown", ".cell", function(){
+    mouseIsDown = true;
+    $(this).toggleClass("alive");
+});
+
+$("#grid").on("mouseup", function(){
+    mouseIsDown = false;
+});
 
 createGrid();
