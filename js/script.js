@@ -19,6 +19,10 @@ function createGrid(){
     $("#grid").html(gridHtml);
 }
 
+$("#clear").click(function(){
+    $(".cell").removeClass("alive");
+})
+
 $("#grid").on("mouseover", ".cell", function(){
     if(mouseIsDown){
         $(this).toggleClass("alive");
