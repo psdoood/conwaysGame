@@ -13,10 +13,13 @@ $("#grid-size").on("input", function(){
 //Button logic
 $("#clear").click(function(){
     $(".cell").removeClass("alive");
+    isRunning = false;
+    clearInterval(interval);
 });
 
 $("#start").click(function(){
     isRunning = true;
+    clearInterval(interval);
     interval = setInterval(aliveOrDead, 100);
 });
 
