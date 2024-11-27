@@ -1,13 +1,29 @@
 let size = 20;
 let isRunning = false;
 let mouseIsDown = false;
+let interval;
 
 //Changes the number by the range input as it is updated
 $("#grid-size").on("input", function(){
     size = $(this).val();
     $("#size-display").text(size);
     createGrid();
-})
+});
+
+//Button logic
+$("#clear").click(function(){
+    $(".cell").removeClass("alive");
+});
+
+$("#start").click(function(){
+    isRunning = true;
+    interval = setInterval(aliveOrDead, 100);
+});
+
+$("#pause").click(function(){
+    isRunning = false;
+    clearInterval(interval);
+});
 
 function createGrid(){
     let gridHtml = "";
@@ -21,10 +37,6 @@ function createGrid(){
 }
 
 //The next section of code handles drawing on the grid
-$("#clear").click(function(){
-    $(".cell").removeClass("alive");
-})
-
 $("#grid").on("mouseover", ".cell", function(){
     if(mouseIsDown){
         $(this).toggleClass("alive");
@@ -81,7 +93,5 @@ function aliveOrDead(){
     }
     cellsToChange.forEach(toggleCell);
 }   
-
-setInterval(aliveOrDead, 100);
 
 createGrid();
