@@ -63,9 +63,12 @@ function countDirs(row, col){
     for([dRow, dCol] of dirs){
         let newRow = row + dRow;
         let newCol = col + dCol;
-        if(newRow < 0 || newRow >= size || newCol < 0 || newCol >= size){
-            continue;
-        }
+        //Next 4 stmts handles grid wrap around
+        if(newRow < 0) newRow = size - 1;   
+        else if(newRow >= size) newRow = 0;
+        if(newCol < 0) newCol = size - 1;
+        else if(newCol >= size) newCol = 0;
+        
         if($("#" + newRow + "-" + newCol).hasClass("alive")){
             count++;
         }
