@@ -34,36 +34,49 @@ body {
     background: var(--alive-cell-col);
 }
 
-h1{
+h1 {
     font-size: 48px;
     font-weight: 700;
 }
 
-#buttons{
+#buttons {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-button{
+button {
     padding: 8px 18px;
     font-size: 20px;
     cursor: pointer;
     background: var(--dead-cell-col);
     color: white;
     border: 1px solid var(--border-col);
+    transition: 0.2s ease-in-out;
 }
 
-button:hover{
+button:hover {
     background: var(--alive-cell-col);
     color: var(--background-col);
-    padding: 8px 26px;
-    transition: 0.3s;
+    padding: 8px 24px;
 }
 
+#grid-size {
+    cursor: pointer;
+    -webkit-appearance: none;
+    background-color: var(--dead-cell-col);
+    height:16px;
+    border: 1px solid var(--border-col);
+}
 
+#grid-size:hover::-webkit-slider-thumb, #grid-size:hover::-moz-range-thumb {
+    background-color: var(--alive-cell-col);
+    transition: 0.2s;
+    height: 20px;
+    width: 20px;
+}
 
-#slider{
+#slider {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
