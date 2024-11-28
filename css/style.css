@@ -1,10 +1,18 @@
+:root{
+    --background-col: #1a1a1a;
+    --dead-cell-col: #252525;
+    --alive-cell-col: #1de297;
+    --border-col: #3a3a3a;
+}
+
 body {
-    background: black;   
-    color: white;
+    background: var(--background-col);
+    color:  white;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-family: "Space Mono", monospace;
 }
 
 #grid {
@@ -17,10 +25,47 @@ body {
     width: 10px;
     height: 10px;
     display: inline-block;
-    background: white;
-    border: 1px solid grey;
+    background: var(--dead-cell-col);
+    border: 1px solid var(--border-col);
 }
 
 .alive {
-    background: black;
+    background: var(--alive-cell-col);
+}
+
+h1{
+    font-size: 48px;
+    font-weight: 700;
+}
+
+#buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button{
+    padding: 8px 18px;
+    font-size: 20px;
+    cursor: pointer;
+    background: var(--dead-cell-col);
+    color: white;
+    border: 1px solid var(--border-col);
+}
+
+button:hover{
+    background: var(--alive-cell-col);
+    color: var(--background-col);
+    padding: 8px 26px;
+    transition: 0.3s;
+}
+
+
+
+#slider{
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 18px;
 }

@@ -5,16 +5,23 @@
     <meta charset="UTF-8">
     <title>Conway's Game of Life</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <h1>Conway's Game of Life</h1>
     <div id="buttons">
-        Grid Size: <span id="size-display">20</span>
-        <input id="grid-size" type="range" value="20" min="10" max="100">
-        <button id="start">►</button>
-        <button id="pause">⏸︎</button>
-        <button id="clear">Clear</button>
+        <div id="slider">
+            Grid Size: <span id="size-display">20</span>
+            <input id="grid-size" type="range" value="20" min="10" max="100">
+        </div>
+        <div>
+            <button id="start">►</button>
+            <button id="pause"><strong>||</strong></button>
+            <button id="clear">Clear</button>
+        </div>
     </div>
     <div id="grid"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
