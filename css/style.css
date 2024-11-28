@@ -19,6 +19,7 @@ body {
     line-height: 0;
     margin: 20px 20px;
     white-space: nowrap;
+    user-select: none;
 }
 
 .cell {
