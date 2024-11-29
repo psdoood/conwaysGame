@@ -83,3 +83,21 @@ button:hover {
     gap: 6px;
     font-size: 18px;
 }
+
+#description {
+    width: 600px;
+}
+
+a {
+    color: white;
+}
+
+a:hover{
+    color: white;
+    font-size: 20px;
+    transition: 0.2s;
+}
+
+a:visited{
+    color: white;
+}
