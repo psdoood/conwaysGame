@@ -61,7 +61,7 @@ button:hover {
     padding: 8px 24px;
 }
 
-#grid-size {
+#grid-size, #speed-size {
     cursor: pointer;
     -webkit-appearance: none;
     background-color: var(--dead-cell-col);
@@ -69,14 +69,15 @@ button:hover {
     border: 1px solid var(--border-col);
 }
 
-#grid-size:hover::-webkit-slider-thumb, #grid-size:hover::-moz-range-thumb {
+#grid-size:hover::-webkit-slider-thumb, #grid-size:hover::-moz-range-thumb,
+#speed-size:hover::-webkit-slider-thumb, #speed-size:hover::-moz-range-thumb{
     background-color: var(--alive-cell-col);
     transition: 0.2s;
     height: 20px;
     width: 20px;
 }
 
-#slider {
+.slider {
     margin-bottom: 10px;
     display: flex;
     align-items: center;

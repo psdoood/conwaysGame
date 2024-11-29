@@ -1,13 +1,23 @@
-let size = 20;
+let size = 40;
 let isRunning = false;
 let mouseIsDown = false;
 let interval;
+let speed = 10;
 
 //Changes the number by the range input as it is updated
 $("#grid-size").on("input", function(){
     size = $(this).val();
     $("#size-display").text(size);
     createGrid();
+});
+//Changes the interval speed input as range is updated
+$("#speed-size").on("input", function(){
+    speed = $(this).val();
+    $("#speed-display").text(speed);
+    if(isRunning){
+        clearInterval(interval);
+        interval = setInterval(aliveOrDead, 700 / speed);
+    }
 });
 
 //Button logic
@@ -20,7 +30,7 @@ $("#clear").click(function(){
 $("#start").click(function(){
     isRunning = true;
     clearInterval(interval);
-    interval = setInterval(aliveOrDead, 100);
+    interval = setInterval(aliveOrDead, 700 / speed);
 });
 
 $("#pause").click(function(){
