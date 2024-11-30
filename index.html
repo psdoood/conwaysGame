@@ -15,7 +15,11 @@
     <div id="buttons">
         <div class="slider">
             Grid Size: <span id="size-display">40</span>
-            <input id="grid-size" type="range" value="40" min="10" max="100">
+            <input id="grid-size" type="range" value="40" min="3" max="100">
+        </div>
+        <div class="slider">
+            Zoom: <span id="zoom-display">5</span>
+            <input id="zoom-size" type="range" value="5" min="1" max="15">
         </div>
         <div class="slider">
             Speed: <span id="speed-display">10</span>
@@ -38,6 +42,8 @@
         4. Dead Cells with exactly 3 alive neighbors come alive<br>
     </p>
     <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">More Info</a>
+    <h2>Cool Patterns</h2>
+    <div id="grid"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/script.js"></script>
 </body>

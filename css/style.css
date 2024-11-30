@@ -20,6 +20,7 @@ body {
     margin: 20px 20px;
     white-space: nowrap;
     user-select: none;
+    font-size: 0;
 }
 
 .cell {
@@ -28,9 +29,22 @@ body {
     display: inline-block;
     background: var(--dead-cell-col);
     border: 1px solid var(--border-col);
+    margin: 0;
+    padding: 0;
+    line-height: 0px;
+}
+
+.cell:hover{
+    background-color: var(--border-col);
+    cursor: pointer;
+
 }
 
 .alive {
+    background: var(--alive-cell-col);
+}
+
+.alive:hover {
     background: var(--alive-cell-col);
 }
 
@@ -61,7 +75,7 @@ button:hover {
     padding: 8px 24px;
 }
 
-#grid-size, #speed-size {
+#grid-size, #speed-size, #zoom-size {
     cursor: pointer;
     -webkit-appearance: none;
     background-color: var(--dead-cell-col);
@@ -70,6 +84,7 @@ button:hover {
 }
 
 #grid-size:hover::-webkit-slider-thumb, #grid-size:hover::-moz-range-thumb,
+#zoom-size:hover::-webkit-slider-thumb, #zoom-size:hover::-moz-range-thumb,
 #speed-size:hover::-webkit-slider-thumb, #speed-size:hover::-moz-range-thumb{
     background-color: var(--alive-cell-col);
     transition: 0.2s;
@@ -91,6 +106,7 @@ button:hover {
 
 a {
     color: white;
+    margin-bottom: 30px;
 }
 
 a:hover{

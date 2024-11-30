@@ -3,15 +3,30 @@ let isRunning = false;
 let mouseIsDown = false;
 let interval;
 let speed = 10;
-
+let zoom = 5;
 
 //Changes the number by the range input as it is updated
 $("#grid-size").on("input", function(){
-    isRunning = false;
     size = $(this).val();
     $("#size-display").text(size);
     createGrid();
+    changeCellZoom();
 });
+
+//Adjusts how zoomed in/out the grid is based of range val
+$("#zoom-size").on("input", function(){
+    zoom = $(this).val();
+    $("#zoom-display").text(zoom);
+    changeCellZoom();
+});
+
+function changeCellZoom(){
+    $(".cell").css({
+        "width": (zoom * 2) +"px",
+        "height": (zoom * 2) +"px"
+    });
+}
+
 //Changes the interval speed input as range is updated
 $("#speed-size").on("input", function(){
     speed = $(this).val();
