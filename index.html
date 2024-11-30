@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
     <h1>Conway's Game of Life</h1>
+    <div class="line"></div>
     <div id="buttons">
         <div class="slider">
             Grid Size: <span id="size-display">40</span>
@@ -29,16 +31,19 @@
             <button id="start">►</button>
             <button id="pause"><strong>||</strong></button>
             <button id="clear">Clear</button>
+            <button onclick="document.querySelector('#how').scrollIntoView({behavior: 'smooth'});">?</button>
         </div>
     </div>
+    <p id="hint">Click and drag to draw on the grid</p>
     <div id="grid"></div>
-    <h2>How does it work?</h2>
+    <div class="line"></div>
+    <h2 id="how">How does it work?</h2>
     <p id="description">Conway's Game of Life is a zero player simulation where cells on a grid
         live or die based on four simple rules:</p>
     <p>
-        1. Cells with < 2 alive neighbors die from isolation<br>
+        1. Cells with less than 2 alive neighbors die from isolation<br>
         2. Cells with 2 or 3 alive neighbors survive<br>
-        3. Cells with > 3 alive neighbors die from overpopulation<br>
+        3. Cells with more than 3 alive neighbors die from overpopulation<br>
         4. Dead Cells with exactly 3 alive neighbors come alive<br>
     </p>
     <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">More Info</a>
