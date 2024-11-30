@@ -4,8 +4,10 @@ let mouseIsDown = false;
 let interval;
 let speed = 10;
 
+
 //Changes the number by the range input as it is updated
 $("#grid-size").on("input", function(){
+    isRunning = false;
     size = $(this).val();
     $("#size-display").text(size);
     createGrid();
@@ -38,11 +40,14 @@ $("#pause").click(function(){
     clearInterval(interval);
 });
 
+
 function createGrid(){
     let gridHtml = "";
     for(i = 0; i < size; i++){
         for(j = 0; j < size; j++){
-            gridHtml += "<div class='cell' id='" + i + '-' + j + "'></div>";
+            let wasAlive = $("#" + i + "-" + j).hasClass("alive");
+            let cellClass = wasAlive ? "cell alive" : "cell";
+            gridHtml += "<div class='" + cellClass + "' id='" + i + '-' + j + "'></div>";
         }
         gridHtml += "<br>";
     }
