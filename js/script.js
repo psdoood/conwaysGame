@@ -2,15 +2,15 @@ let size = 40;
 let isRunning = false;
 let mouseIsDown = false;
 let interval;
+let intervalEx;
 let speed = 10;
 let zoom = 5;
-let exampleGridSize = 60;
 
 //Changes the number by the range input as it is updated
 $("#grid-size").on("input", function(){
     size = $(this).val();
     $("#size-display").text(size);
-    createGrid();
+    createGrid(false, size, size);
     changeCellZoom();
 });
 
@@ -22,7 +22,7 @@ $("#zoom-size").on("input", function(){
 });
 
 function changeCellZoom(){
-    $(".cell").css({
+    $(".main .cell").css({
         "width": (zoom * 2) +"px",
         "height": (zoom * 2) +"px"
     });
@@ -40,7 +40,7 @@ $("#speed-size").on("input", function(){
 
 //Button logic
 $("#clear").click(function(){
-    $(".cell").removeClass("alive");
+    $(".main .cell").removeClass("alive");
     isRunning = false;
     clearInterval(interval);
 });
@@ -48,12 +48,29 @@ $("#clear").click(function(){
 $("#start").click(function(){
     isRunning = true;
     clearInterval(interval);
+    clearInterval(intervalEx);
     interval = setInterval(() => aliveOrDead("main"), 700 / speed);
 });
 
 $("#pause").click(function(){
     isRunning = false;
     clearInterval(interval);
+});
+
+$("#startEx").click(function(){
+    isRunning = false;
+    clearInterval(interval);
+    clearInterval(intervalEx);
+    intervalEx = setInterval(() => aliveOrDead("ex"), 70);
+});
+
+$("#pauseEx").click(function(){
+    clearInterval(intervalEx);
+});
+
+$("#resetEx").click(function(){
+    $(".ex .cell").removeClass("alive");
+    createGrid(true, 80, 40);
 });
 
 

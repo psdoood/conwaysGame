@@ -35,7 +35,7 @@
         </div>
     </div>
     <p id="hint">Click and drag to draw on the grid, then press play</p>
-    <div id="grid"></div>
+    <div id="grid" class="main"></div>
     <div class="line"></div>
     <h2 id="how">How does it work?</h2>
     <p id="description">Conway's Game of Life is a zero player cell simulation where cells on a grid
@@ -48,10 +48,14 @@
     </p>
     <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">More Info</a>
     <div class="line"></div>
-    <h2>Cool Patterns</h2>
-    <div id="patterns">
-        <div class="example-grid" id="spaceships"></div>
+    <h2>Interesting Patterns</h2>
+    <div>
+        <button id="startEx">►</button>
+        <button id="pauseEx"><strong>||</strong></button>
+        <button id="resetEx"><strong>←</strong></button>
     </div>
+    <p id="hint">This example pauses the above simulation, and vice versa</p>
+    <div id="spaceships" class="ex"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/script.js"></script>
 </body>
