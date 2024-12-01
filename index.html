@@ -34,11 +34,11 @@
             <button onclick="document.querySelector('#how').scrollIntoView({behavior: 'smooth'});">?</button>
         </div>
     </div>
-    <p id="hint">Click and drag to draw on the grid</p>
+    <p id="hint">Click and drag to draw on the grid, then press play</p>
     <div id="grid"></div>
     <div class="line"></div>
     <h2 id="how">How does it work?</h2>
-    <p id="description">Conway's Game of Life is a zero player simulation where cells on a grid
+    <p id="description">Conway's Game of Life is a zero player cell simulation where cells on a grid
         live or die based on four simple rules:</p>
     <p>
         1. Cells with less than 2 alive neighbors die from isolation<br>
@@ -47,8 +47,11 @@
         4. Dead Cells with exactly 3 alive neighbors come alive<br>
     </p>
     <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">More Info</a>
+    <div class="line"></div>
     <h2>Cool Patterns</h2>
-    <div id="grid"></div>
+    <div id="patterns">
+        <div class="example-grid" id="spaceships"></div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/script.js"></script>
 </body>

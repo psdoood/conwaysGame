@@ -15,7 +15,7 @@ body {
     font-family: "Space Mono", monospace;
 }
 
-#grid {
+#grid, #spaceships {
     line-height: 0;
     margin-top: 0;
     white-space: nowrap;
@@ -113,8 +113,8 @@ a {
 
 a:hover{
     color: white;
-    font-size: 20px;
-    transition: 0.2s;
+    transition: 0.3s;
+    letter-spacing: 4px;
 }
 
 a:visited{
@@ -132,5 +132,5 @@ a:visited{
     margin-top: 20px;
     margin-bottom: 0;
     color: var(--border-col);
-    font-size: 16px;
+    font-size: 14px;
 }
