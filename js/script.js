@@ -5,6 +5,8 @@ let interval;
 let intervalEx;
 let speed = 10;
 let zoom = 5;
+let exRow = 65;
+let exCol = 40;
 
 //Changes the number by the range input as it is updated
 $("#grid-size").on("input", function(){
@@ -34,7 +36,7 @@ $("#speed-size").on("input", function(){
     $("#speed-display").text(speed);
     if(isRunning){
         clearInterval(interval);
-        interval = setInterval(() => aliveOrDead("main"), 700 / speed);
+        interval = setInterval(() => aliveOrDead("main", size, size), 700 / speed);
     }
 });
 
@@ -49,7 +51,7 @@ $("#start").click(function(){
     isRunning = true;
     clearInterval(interval);
     clearInterval(intervalEx);
-    interval = setInterval(() => aliveOrDead("main"), 700 / speed);
+    interval = setInterval(() => aliveOrDead("main", size, size), 700 / speed);
 });
 
 $("#pause").click(function(){
@@ -61,7 +63,7 @@ $("#startEx").click(function(){
     isRunning = false;
     clearInterval(interval);
     clearInterval(intervalEx);
-    intervalEx = setInterval(() => aliveOrDead("ex"), 70);
+    intervalEx = setInterval(() => aliveOrDead("ex", exRow, exCol), 70);
 });
 
 $("#pauseEx").click(function(){
@@ -70,7 +72,7 @@ $("#pauseEx").click(function(){
 
 $("#resetEx").click(function(){
     $(".ex .cell").removeClass("alive");
-    createGrid(true, 80, 40);
+    createGrid(true, exRow, exCol);
 });
 
 
@@ -90,6 +92,10 @@ function createGrid(isExample = false, rows, cols){
         $("#spaceships").html(gridHtml);
         patterns.bigGlider.forEach(([r,c]) => {$("#ex" + "-" + r + "-" + c).addClass("alive");});
         patterns.hammerHead.forEach(([r,c]) => {$("#ex" + "-" + r + "-" + c).addClass("alive");});
+        patterns.smallShip.forEach(([r,c]) => {$("#ex" + "-" + r + "-" + c).addClass("alive");});
+        patterns.mediumShip.forEach(([r,c]) => {$("#ex" + "-" + r + "-" + c).addClass("alive");});
+        patterns.pulsar.forEach(([r,c]) => {$("#ex" + "-" + r + "-" + c).addClass("alive");});
+        patterns.star.forEach(([r,c]) => {$("#ex" + "-" + r + "-" + c).addClass("alive");});
     }
     else{
     $("#grid").html(gridHtml);
@@ -108,7 +114,7 @@ $("#grid").on("mousedown", ".cell", function(){
     $(this).toggleClass("alive");
 });
 
-$("#grid").on("mouseup", function(){
+$("body").on("mouseup", function(){
     mouseIsDown = false;
 });
 
@@ -117,14 +123,21 @@ const dirs = [[1,1], [1,0], [1,-1], [0,-1], [-1,-1], [-1,0], [-1,1], [0,1]];
 //Counts the neighboring cells to see how many are alive
 function countDirs(prefix, row, col){
     let count = 0;
+    let rowSize; let colSize;
+    if(prefix == "main"){
+        rowSize = size; colSize = size;
+    }
+    else{
+        rowSize = exRow; colSize = exCol;
+    }
     for([dRow, dCol] of dirs){
         let newRow = row + dRow;
         let newCol = col + dCol;
         //Next 4 stmts handles grid wrap around
-        if(newRow < 0) newRow = size - 1;   
-        else if(newRow >= size) newRow = 0;
-        if(newCol < 0) newCol = size - 1;
-        else if(newCol >= size) newCol = 0;
+        if(newRow < 0) newRow = rowSize - 1;   
+        else if(newRow >= rowSize) newRow = 0;
+        if(newCol < 0) newCol = colSize - 1;
+        else if(newCol >= colSize) newCol = 0;
         
         if($("#" + prefix + "-" + newRow + "-" + newCol).hasClass("alive")){
             count++;
@@ -143,10 +156,10 @@ function toggleCell(cell){
 // 2. Any live cell with two or three live neighbours lives on to the next generation.
 // 3. Any live cell with more than three live neighbours dies, as if by overpopulation.
 // 4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-function aliveOrDead(prefix){
+function aliveOrDead(prefix, row, col){
     let cellsToChange = [];
-    for(let i = 0; i < size; i++){
-        for(let j = 0; j < size; j++){
+    for(let i = 0; i < row; i++){
+        for(let j = 0; j < col; j++){
             let numAliveAdj = countDirs(prefix, i, j);
             let isAlive = $("#" + prefix + "-" + i + "-" + j).hasClass("alive");
             if(((numAliveAdj < 2 || numAliveAdj > 3) && isAlive)||(numAliveAdj == 3 && !isAlive)){
@@ -169,8 +182,16 @@ const patterns = {
     [20,10], [20,12], [21,7], [22,7], [23,6], [23,8], [23,10], [23,12], [24,5], [24,10], [24,13],
     [25,3], [25,4], [25,8], [25,9], [25,11], [25,12], [25,15], [25,16], [26,1], [26,11], [26,12], 
     [26,14], [26,15], [26, 16], [26,17], [27,0], [27,12], [27, 13], [27,15], [27,16], [27,17],
-    [28,0], [28,5], [28,13], [28,14], [29,0], [29,1], [29,2], [29,3], [29,4]]
+    [28,0], [28,5], [28,13], [28,14], [29,0], [29,1], [29,2], [29,3], [29,4]],
+    smallShip: [[35,2], [35,3], [36,0], [36,1], [36,3], [36,4], [37,0], [37,1], [37,2], [37,3],
+    [38,1], [38,2]],
+    mediumShip: [[42,3], [42,4], [43,1], [43,6], [44,0], [45, 0], [45,6], [46,0], [46,1], [46,2],
+    [46,3], [46,4], [46,5]],
+    pulsar: [[56,7], [56,14], [57,6], [57,7], [57,14], [57,15], [58,5], [58,6], [58,7], [58,14],
+    [58,15], [58,16], [59,6], [59,7], [59,14], [59,15], [60,7], [60,14]],
+    star: [[55,29], [56, 27], [56, 29], [57,31], [58,25], [58,26], [59,31], [59,32], [60,26], 
+    [61,28], [61,30], [62,28]]
 };
 
 createGrid(false, size, size);
-createGrid(true, 80, 40);
+createGrid(true, exRow, exCol);

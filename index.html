@@ -31,15 +31,15 @@
             <button id="start">►</button>
             <button id="pause"><strong>||</strong></button>
             <button id="clear">Clear</button>
-            <button onclick="document.querySelector('#how').scrollIntoView({behavior: 'smooth'});">?</button>
+            <button onclick="document.querySelector('#scrollpoint').scrollIntoView({behavior: 'smooth'});">?</button>
         </div>
     </div>
     <p id="hint">Click and drag to draw on the grid, then press play</p>
     <div id="grid" class="main"></div>
-    <div class="line"></div>
-    <h2 id="how">How does it work?</h2>
-    <p id="description">Conway's Game of Life is a zero player cell simulation where cells on a grid
-        live or die based on four simple rules:</p>
+    <div class="line" id="scrollpoint"></div>
+    <h2>How does it work?</h2>
+    <p id="description">Conway's Game of Life is a zero player cell simulation that a british mathematician named
+        John Conway designed in the seventies. It involves cells on a grid that live or die based on four simple rules:</p>
     <p>
         1. Cells with less than 2 alive neighbors die from isolation<br>
         2. Cells with 2 or 3 alive neighbors survive<br>
@@ -48,7 +48,7 @@
     </p>
     <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">More Info</a>
     <div class="line"></div>
-    <h2>Interesting Patterns</h2>
+    <h2>Interesting Pattern Examples</h2>
     <div>
         <button id="startEx">►</button>
         <button id="pauseEx"><strong>||</strong></button>
@@ -56,6 +56,7 @@
     </div>
     <p id="hint">This example pauses the above simulation, and vice versa</p>
     <div id="spaceships" class="ex"></div>
+    <a href="https://conwaylife.com/wiki/Category:Patterns">More Patterns</a>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/script.js"></script>
 </body>
