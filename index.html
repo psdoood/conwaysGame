@@ -17,7 +17,7 @@
     <div id="buttons">
         <div class="slider">
             Grid Size: <span id="size-display">40</span>
-            <input id="grid-size" type="range" value="40" min="3" max="100">
+            <input id="grid-size" type="range" value="40" min="3" max="150">
         </div>
         <div class="slider">
             Zoom: <span id="zoom-display">5</span>
@@ -35,7 +35,9 @@
         </div>
     </div>
     <p id="hint">Click and drag to draw on the grid, then press play</p>
-    <div id="grid" class="main"></div>
+    <div id="grid-container">
+        <div id="grid" class="main"></div>
+    </div>
     <div class="line" id="scrollpoint"></div>
     <h2>How does it work?</h2>
     <p id="description">Conway's Game of Life is a zero player cell simulation that a british mathematician named
