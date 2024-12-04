@@ -21,6 +21,9 @@ body {
     white-space: nowrap;
     user-select: none;
     font-size: 0;
+    display: inline-block;
+    max-height: 80vh;
+    max-width: 80vw;
 }
 #spaceships {
     margin-bottom: 20px;
@@ -136,4 +139,16 @@ a:visited{
     margin-bottom: 0;
     color: var(--border-col);
     font-size: 14px;
+}
+
+#grid-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    width: 70vw;
+    height: 70vh;
+    overflow: auto;
+    border: 2px dotted var(--border-col);
+    margin: 20px;
 }
