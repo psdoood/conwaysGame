@@ -1,12 +1,12 @@
 let size = 40;
+let exRow = 65;
+let exCol = 40;
 let isRunning = false;
 let mouseIsDown = false;
 let interval;
 let intervalEx;
 let speed = 10;
 let zoom = 5;
-let exRow = 65;
-let exCol = 40;
 
 //Changes the number by the range input as it is updated
 $("#grid-size").on("input", function(){
@@ -40,7 +40,7 @@ $("#speed-size").on("input", function(){
     }
 });
 
-//Button logic
+//Button logic section 
 $("#clear").click(function(){
     $(".main .cell").removeClass("alive");
     isRunning = false;
@@ -75,7 +75,6 @@ $("#resetEx").click(function(){
     createGrid(true, exRow, exCol);
 });
 
-
 function createGrid(isExample = false, rows, cols){
     let id;
     isExample ? id = "ex" : id = "main";
@@ -88,7 +87,11 @@ function createGrid(isExample = false, rows, cols){
         }
         gridHtml += "<br>";
     }
-    if(isExample){
+    if(!isExample){
+        $("#grid").html(gridHtml);
+        
+    }
+    else{
         $("#spaceships").html(gridHtml);
         patterns.bigGlider.forEach(([r,c]) => {$("#ex" + "-" + r + "-" + c).addClass("alive");});
         patterns.hammerHead.forEach(([r,c]) => {$("#ex" + "-" + r + "-" + c).addClass("alive");});
@@ -96,9 +99,6 @@ function createGrid(isExample = false, rows, cols){
         patterns.mediumShip.forEach(([r,c]) => {$("#ex" + "-" + r + "-" + c).addClass("alive");});
         patterns.pulsar.forEach(([r,c]) => {$("#ex" + "-" + r + "-" + c).addClass("alive");});
         patterns.star.forEach(([r,c]) => {$("#ex" + "-" + r + "-" + c).addClass("alive");});
-    }
-    else{
-    $("#grid").html(gridHtml);
     }
 }
 
@@ -131,14 +131,7 @@ function countDirs(prefix, row, col){
         rowSize = exRow; colSize = exCol;
     }
     for([dRow, dCol] of dirs){
-        let newRow = row + dRow;
-        let newCol = col + dCol;
-        //Next 4 stmts handles grid wrap around
-        if(newRow < 0) newRow = rowSize - 1;   
-        else if(newRow >= rowSize) newRow = 0;
-        if(newCol < 0) newCol = colSize - 1;
-        else if(newCol >= colSize) newCol = 0;
-        
+        let [newRow, newCol] = getNeighbor(row, col, dRow, dCol, rowSize, colSize);
         if($("#" + prefix + "-" + newRow + "-" + newCol).hasClass("alive")){
             count++;
         }
@@ -158,19 +151,42 @@ function toggleCell(cell){
 // 4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 function aliveOrDead(prefix, row, col){
     let cellsToChange = [];
-    for(let i = 0; i < row; i++){
-        for(let j = 0; j < col; j++){
-            let numAliveAdj = countDirs(prefix, i, j);
-            let isAlive = $("#" + prefix + "-" + i + "-" + j).hasClass("alive");
-            if(((numAliveAdj < 2 || numAliveAdj > 3) && isAlive)||(numAliveAdj == 3 && !isAlive)){
-                cellsToChange.push("#" + prefix + "-" + i + "-" + j);
-            }     
-        }
-    }
-    cellsToChange.forEach(toggleCell);
-}   
+    let cellsToCheck = new Set();
+    let rowSize = prefix === "main" ? size : exRow;
+    let colSize = prefix === "main" ? size : exCol;
 
-//Example grid section
+    $("." + prefix + " .alive").each(function() {
+        let [_, r, c] = $(this).attr('id').split('-').map(Number);
+        cellsToCheck.add(`${r}-${c}`);
+        for(let [dRow, dCol] of dirs){
+            let [newRow, newCol] = getNeighbor(r, c, dRow, dCol, rowSize, colSize);
+            cellsToCheck.add(newRow + "-" + newCol);
+        }
+    });
+
+    cellsToCheck.forEach(coords => {
+        let [r, c] = coords.split('-').map(Number);
+        let numAliveAdj = countDirs(prefix, r, c);
+        let isAlive = $("#" + prefix + "-" + r + "-" + c).hasClass("alive");
+        if(((numAliveAdj < 2 || numAliveAdj > 3) && isAlive) || 
+            (numAliveAdj == 3 && !isAlive)){
+            cellsToChange.push("#" + prefix + "-" + r + "-" + c);
+        }
+    });
+    cellsToChange.forEach(toggleCell);
+} 
+
+function getNeighbor(r, c, dRow, dCol, rowSize, colSize){
+    let newRow = r + dRow;
+    let newCol = c + dCol;
+    if(newRow < 0) newRow = rowSize - 1;   
+    else if(newRow >= rowSize) newRow = 0;
+    if(newCol < 0) newCol = colSize - 1;
+    else if(newCol >= colSize) newCol = 0;
+
+    return [newRow, newCol];
+}
+
 const patterns = {
     bigGlider: [[1,5], [1,7], [1,8], [2,4], [2,11], [3,3], [3,4], [3,8], [3,11], [4,0], [4,1],
     [4,3], [4,9], [4,10], [5,0], [5,1], [5,3], [5,9], [5,10], [6,3], [6,4], [6,8], [6,11],
