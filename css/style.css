@@ -151,6 +151,7 @@ a:visited{
     overflow: auto;
     border: 2px dotted var(--border-col);
     margin: 20px;
+    margin-top: 0px;
 }
 
 #more-patterns {
