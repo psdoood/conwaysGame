@@ -17,7 +17,7 @@
     <div id="buttons">
         <div class="slider">
             Grid Size: <span id="size-display">40</span>
-            <input id="grid-size" type="range" value="40" min="3" max="150">
+            <input id="grid-size" type="range" value="40" min="3" max="100">
         </div>
         <div class="slider">
             Zoom: <span id="zoom-display">5</span>
@@ -28,8 +28,7 @@
             <input id="speed-size" type="range" value="10" min="1" max="10">
         </div>
         <div>
-            <button id="start">►</button>
-            <button id="pause"><strong>||</strong></button>
+            <button id="play-pause">►</button>
             <button id="clear">Clear</button>
             <button onclick="document.querySelector('#scrollpoint').scrollIntoView({behavior: 'smooth'});">?</button>
         </div>
@@ -52,8 +51,7 @@
     <div class="line"></div>
     <h2>Interesting Pattern Examples</h2>
     <div>
-        <button id="startEx">►</button>
-        <button id="pauseEx"><strong>||</strong></button>
+        <button id="play-pause-ex">►</button>
         <button id="resetEx"><strong>←</strong></button>
     </div>
     <p id="hint">This example pauses the above simulation, and vice versa</p>

@@ -2,6 +2,7 @@ let size = 40;
 let exRow = 65;
 let exCol = 40;
 let isRunning = false;
+let isRunningEx = false;
 let mouseIsDown = false;
 let interval;
 let intervalEx;
@@ -44,34 +45,52 @@ $("#speed-size").on("input", function(){
 $("#clear").click(function(){
     $(".main .cell").removeClass("alive");
     isRunning = false;
+    $("#play-pause").text("►");
     clearInterval(interval);
 });
 
-$("#start").click(function(){
-    isRunning = true;
-    clearInterval(interval);
+$("#play-pause").click(function(){
+    isRunning = !isRunning;
+
+    if(isRunning){
+        $(this).text("||");
+        $("#play-pause-ex").text("►");
+        isRunningEx = false;
+        clearInterval(interval);
+        clearInterval(intervalEx);
+        interval = setInterval(() => aliveOrDead("main", size, size), 700 / speed);
+    }
+    else{
+        $(this).text("►");
+        clearInterval(interval);
+    }
+});
+
+$("#play-pause-ex").click(function(){
+    if(isRunning){
+        isRunning = false;
+        $("#play-pause").text("►");
+        clearInterval(interval);
+    }
+
+    isRunningEx = !isRunningEx;
     clearInterval(intervalEx);
-    interval = setInterval(() => aliveOrDead("main", size, size), 700 / speed);
-});
 
-$("#pause").click(function(){
-    isRunning = false;
-    clearInterval(interval);
-});
-
-$("#startEx").click(function(){
-    isRunning = false;
-    clearInterval(interval);
-    clearInterval(intervalEx);
-    intervalEx = setInterval(() => aliveOrDead("ex", exRow, exCol), 70);
-});
-
-$("#pauseEx").click(function(){
-    clearInterval(intervalEx);
+    if(isRunningEx){
+        $(this).text("||");
+        clearInterval(interval);
+        intervalEx = setInterval(() => aliveOrDead("ex", exRow, exCol), 70);
+    } 
+    else{
+        $(this).text("►");
+    }
 });
 
 $("#resetEx").click(function(){
     $(".ex .cell").removeClass("alive");
+    isRunningEx = false;
+    $("#play-pause-ex").text("►");
+    clearInterval(intervalEx);
     createGrid(true, exRow, exCol);
 });
 
