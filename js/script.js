@@ -8,6 +8,7 @@ let interval;
 let intervalEx;
 let speed = 10;
 let zoom = 5;
+let gen = 0;
 
 //Changes the number by the range input as it is updated
 $("#grid-size").on("input", function(){
@@ -47,6 +48,8 @@ $("#clear").click(function(){
     isRunning = false;
     $("#play-pause").text("►");
     clearInterval(interval);
+    gen = 0;
+    updateGen(gen);
 });
 
 $("#play-pause").click(function(){
@@ -192,6 +195,9 @@ function aliveOrDead(prefix, row, col){
             cellsToChange.push("#" + prefix + "-" + r + "-" + c);
         }
     });
+    if(prefix == "main"){
+        updateGen(gen += 1);
+    }
     cellsToChange.forEach(toggleCell);
 } 
 
@@ -204,6 +210,10 @@ function getNeighbor(r, c, dRow, dCol, rowSize, colSize){
     else if(newCol >= colSize) newCol = 0;
 
     return [newRow, newCol];
+}
+
+function updateGen(gen){
+    $("#gen-display").text(gen);
 }
 
 const patterns = {
